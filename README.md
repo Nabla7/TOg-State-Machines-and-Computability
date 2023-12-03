@@ -95,3 +95,13 @@ tasks, or compile programs in a higher-level programming language
 
 #### I'm trying to use this to guide my explanations of the proof with better link to implementation
 Role of Positional Encodings and Internal Representations: A crucial aspect of the paper is how positional encodings and the model’s ability to compute and access internal dense representations of data enable Transformers to achieve Turing completeness. This is significant because it shows that Transformers can inherently process sequential data in a way that’s comparable to the sequential processing of a Turing machine.
+
+ - In the limit of precision a fixed parameter transformer is Turing complete.
+
+### Summary again :
+
+- Computational Power Without External Memory:
+The paper demonstrates that both the Transformer and Neural GPU are Turing complete based on their ability to compute and access internal dense representations of data, without the need for external memory. This is a significant finding because it shows that these models possess a high level of computational power within their bounded architectures​​.
+
+- Arbitrary Precision Assumption and its practical caveat:
+A critical aspect of the proof is the assumption of arbitrary precision for internal representations. This is particularly important for storing and manipulating positional encodings in Transformers. However, in practical implementations, neural networks operate with fixed precision due to hardware constraints. Therefore, when fixed precision is used, the Transformer loses its Turing completeness, as the effect of positional encodings becomes equivalent to just increasing the size of the input alphabet​​.
