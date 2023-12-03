@@ -74,5 +74,4 @@ Our results say nothing about the computational power when fixed precision (like
 1. How can we motivate this assumption of infinite precision ?
 2. What does it mean to make the trade of between external memory and internal precision ?
 3. How can the answers to 1 and 2 lead to a better explanation of the proof in the paper that transformers are Turing Complete ?
-
-
+4. Maybe we can build little transformers with increasing amounts of precision and perform tests ? Idk if thats interesting 
