@@ -75,3 +75,22 @@ Our results say nothing about the computational power when fixed precision (like
 2. What does it mean to make the trade of between external memory and internal precision ?
 3. How can the answers to 1 and 2 lead to a better explanation of the proof in the paper that transformers are Turing Complete ?
 4. Maybe we can build little transformers with increasing amounts of precision and perform tests ? Idk if thats interesting 
+
+
+### Further background, this paper cites Jorge's paper: Looped Transformers as Programmable Computers (https://arxiv.org/pdf/2301.13196.pdf)
+
+> Surprisingly, through in-context learning LLMs can perform algorithmic tasks and reasoning,
+as demonstrated in several works including Nye et al. [2021], Wei et al. [2022c], Lewkowycz
+et al. [2022], Wei et al. [2022b], Zhou et al. [2022], Dasgupta et al. [2022], Chung et al. [2022].
+For example, Zhou et al. [2022] showed that LLMs can successfully perform addition on unseen
+examples when prompted with a multidigit addition algorithm and a few examples of addition.
+These results suggest that LLMs can apply algorithmic principles and perform pre-instructed
+commands on a given input at inference time, as if interpreting natural language as code.
+Constructive arguments have demonstrated that Transformers can simulate Turing Machines
+with enough depth or recursive links between attention layers Pérez et al. [2021], Pérez et al. [2019],
+Wei et al. [2022a]. This demonstrates the potential of transformer networks to precisely follow
+algorithmic instructions specified by the input. Yet, these constructions are more generalized and
+do not provide insight into how to create Transformers that can carry out particular algorithmic
+tasks, or compile programs in a higher-level programming language
+
+#### I'm trying to use this to guide my explanations of the proof with better link to implementation
