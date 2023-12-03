@@ -94,3 +94,4 @@ do not provide insight into how to create Transformers that can carry out partic
 tasks, or compile programs in a higher-level programming language
 
 #### I'm trying to use this to guide my explanations of the proof with better link to implementation
+Role of Positional Encodings and Internal Representations: A crucial aspect of the paper is how positional encodings and the model’s ability to compute and access internal dense representations of data enable Transformers to achieve Turing completeness. This is significant because it shows that Transformers can inherently process sequential data in a way that’s comparable to the sequential processing of a Turing machine.
