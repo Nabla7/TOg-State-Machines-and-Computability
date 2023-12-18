@@ -103,6 +103,10 @@ Role of Positional Encodings and Internal Representations: A crucial aspect of t
 
  - In the limit of precision a fixed parameter transformer is Turing complete.
 
+- perez is cited here https://arxiv.org/abs/1906.06755 Theoretical Limitations of Self-Attention in Neural Sequence Models:
+  - > Theoretical study of transformers was initiate by Perez et al. (2019), who theoretically studied the ability of Seq2Seq transformers to emulate the computation of Turing machines.
+   - > A related, though different, strand of research has investigated the power of neural networks to model Turing machines. A classical result (Siegelman and Sontag, 1995) states that—given unlimited computation time—recurrent networks can emulate the computation of Turing machines. Very recently, Perez et al. (2019) have shown the same result for both (argmax-attention) Transformers and Neural GPUs. The crucial difference between these studies and studies of language recognition is that, in these studies, the networks are allowed to perform unbounded recurrent computations, arbitrarily longer than the input length.
+
 ### Summary again :
 
 - Computational Power Without External Memory:
@@ -113,5 +117,9 @@ A critical aspect of the proof is the assumption of arbitrary precision for inte
 
 ### Overview of concepts to talk about in tentative order:
 
--from wikipedia on Universal Turing Machine:
+- from wikipedia on Universal Turing Machine:
 > A universal Turing machine can calculate any recursive function, decide any recursive language, and accept any recursively enumerable language. According to the Church–Turing thesis, the problems solvable by a universal Turing machine are exactly those problems solvable by an algorithm or an effective method of computation, for any reasonable definition of those terms. For these reasons, a universal Turing machine serves as a standard against which to compare computational systems, and a system that can simulate a universal Turing machine is called Turing complete.
+
+- talk about transformer
+  - Turing complete theoretically even without positional encoding
+  - Not Turing complete empirically, limited precision, is able to recognize certain formal languages, heavily dependent on positional encoding to work.
