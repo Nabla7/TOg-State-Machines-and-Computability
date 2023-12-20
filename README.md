@@ -120,6 +120,26 @@ The paper demonstrates that both the Transformer and Neural GPU are Turing compl
 - Arbitrary Precision Assumption and its practical caveat:
 A critical aspect of the proof is the assumption of arbitrary precision for internal representations. This is particularly important for storing and manipulating positional encodings in Transformers. However, in practical implementations, neural networks operate with fixed precision due to hardware constraints. Therefore, when fixed precision is used, the Transformer loses its Turing completeness, as the effect of positional encodings becomes equivalent to just increasing the size of the input alphabet​​.
 
+### On the Computational Power of Decoder-Only Transformer Language Models (Roberts, 2023) 
+https://arxiv.org/abs/2305.17026
+
+- In this paper we prove the ability of decoder-only transformer models to simulate an arbitrary RNN and are therefore computationally universal.
+
+> very minimal
+
+### On the Computational Power of Transformers and its Implications in Sequence Modeling (Bhattamishra et al. 2020)
+https://aclanthology.org/2020.conll-1.37.pdf 
+
+- We first provide an alternate and simpler proof to show that vanilla Transformers are Turing-complete and then we prove that Transformers with only positional masking and without any positional encoding are also Turing-complete. We further analyze the necessity of each component for the Turing-completeness of the network; interestingly, we find that a particular type of residual connection is necessary.
+
+"
+Theoretical work on Transformers was initiated
+by Perez et al. ´ (2019) who formalized the notion of
+Transformers and showed that it can simulate a Turing machine given arbitrary precision ... Hahn
+(2020) showed some limitations of Transformer
+encoders in modeling regular and context-free languages
+"
+
 ### Overview of concepts to talk about in tentative order:
 
 - from wikipedia on Universal Turing Machine:
