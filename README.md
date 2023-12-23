@@ -124,6 +124,8 @@ The paper demonstrates that both the Transformer and Neural GPU are Turing compl
 - Arbitrary Precision Assumption and its practical caveat:
 A critical aspect of the proof is the assumption of arbitrary precision for internal representations. This is particularly important for storing and manipulating positional encodings in Transformers. However, in practical implementations, neural networks operate with fixed precision due to hardware constraints. Therefore, when fixed precision is used, the Transformer loses its Turing completeness, as the effect of positional encodings becomes equivalent to just increasing the size of the input alphabet​​.
 
+- https://www.reddit.com/r/MachineLearning/comments/6il5rk/d_rnns_are_not_really_turing_complete_in_any/
+
 ### On the Computational Power of Transformers and its Implications in Sequence Modeling (Bhattamishra et al. 2020)
 https://aclanthology.org/2020.conll-1.37.pdf 
 
