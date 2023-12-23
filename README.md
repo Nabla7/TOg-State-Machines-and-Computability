@@ -230,3 +230,30 @@ evaluation.
 - talk about transformer
   - Turing complete theoretically even without positional encoding
   - Not Turing complete empirically, limited precision, is able to recognize certain formal languages, heavily dependent on positional encoding to work.
+
+---
+
+### First concrete plan assembled from the references:
+
+1. **Definition of Turing Completeness**: A computational system is considered Turing complete if it can simulate any Turing machine. This means it can compute anything that is computable, given enough time and memory.
+
+2. **Transformers and Turing Completeness**:
+    - The initial paper by Pérez et al. (2019) demonstrated that transformers are theoretically Turing complete. This conclusion is based on the assumption that transformers have arbitrary precision in their internal representations.
+    - Turing completeness in this context implies that transformers, in theory, can perform any computation that a Turing machine can, assuming they are not limited by practical constraints like finite precision and finite memory.
+
+3. **Practical Limitations**:
+    - In practical implementations, transformers are limited by hardware constraints, most notably fixed precision (like float32). This limitation is significant because it affects the ability of transformers to handle computations requiring very high precision.
+    - Furthermore, transformers, particularly those without external memory, rely heavily on their internal structure and precision to handle computations. The absence of external memory means that transformers must use their internal capacity (like layers, heads, and internal states) to store and process information.
+
+4. **Stack Emulation and Turing Completeness**:
+    - The ability to emulate a stack is a specific capability often associated with processing nested or hierarchical structures. While it's a useful feature for certain types of computations, it's not a requirement for a system to be Turing complete.
+    - Transformers' limitations in emulating stacks, as highlighted in Hahn's paper, point to challenges in handling certain types of structured tasks. However, this does not directly translate to a lack of Turing completeness. It rather indicates that while transformers can theoretically compute anything a Turing machine can, they might not be the most efficient or effective tool for every kind of computation, especially those involving deeply nested or recursive structures.
+
+5. **Theoretical vs. Empirical Turing Completeness**:
+    - Theoretically, transformers are Turing complete under the assumption of arbitrary precision. This aligns with the classical approach in theoretical computer science where such idealized assumptions are common.
+    - Empirically, in real-world implementations, transformers may not exhibit Turing completeness due to the aforementioned practical constraints. This does not negate their theoretical computational power but highlights the gap between theoretical models and practical applications.
+
+6. **Future Research and Practical Implications**:
+    - The current state of research suggests a path forward where the computational power of transformers can be further explored, especially in the context of fixed precision and practical constraints.
+
+So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
