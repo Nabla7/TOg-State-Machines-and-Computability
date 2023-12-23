@@ -257,3 +257,28 @@ evaluation.
     - The current state of research suggests a path forward where the computational power of transformers can be further explored, especially in the context of fixed precision and practical constraints.
 
 So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
+
+----
+# Hahn (2020) : 
+
+The paper "Theoretical Limitations of Self-Attention in Neural Sequence Models" by Michael Hahn provides several key mathematical insights and proofs regarding the limitations of self-attention mechanisms in transformers:
+
+### 1. The Concept of Input Restrictions:
+   - **Definition**: An input restriction is a family of maps $\rho_n : \{1,...,n\} \rightarrow \{*,0,1\}$  for  $n \in \mathbb{N}$. This concept is used to analyze how transformers can be 'forced' to ignore certain input bits by setting some inputs to fixed values.
+   - **Application**: The paper uses input restrictions to show that for any hard-attention transformer, there is a way to set a small fraction of input symbols that causes the transformer to ignore almost all remaining input symbols.
+
+### 2. Theorem on Hard Attention Transformers:
+   - **Theorem 1**: This theorem states that any transformer with hard attention cannot represent periodic regular languages or 2DYCK (a basic hierarchical structure).
+   - **Proof Strategy**: The proof involves constructing sets of input words that any given transformer model will misclassify, utilizing the concept of input restrictions.
+
+### 3. Depth Reduction Lemma:
+   - **Lemma 4 (Depth Reduction Lemma)**: This lemma is a technical tool used in the proof of Theorem 1. It states that given a transformer with $L$  layers and some restriction $\rho$,  one can construct a restriction $\rho'$ such that the resulting function is computed by a transformer with $L-1$  layers.
+
+### 4. Soft Attention Analysis:
+   - **Lemma 5**: Addresses soft attention transformers. It suggests that changing a single input symbol in a long input sequence only causes a bounded change in the output activation.
+   - **Theorem 6**: This theorem discusses the limitations of soft attention transformers in modeling distributions over formal languages like PARITY or 2DYCK.
+
+### 5. Mathematical Proofs and Techniques:
+   - **Combination of Techniques**: The paper employs a mix of combinatorial arguments, the concept of input restrictions, and probabilistic methods to prove the limitations of self-attention.
+   - **Implications for Hierarchical Structure**: A key finding is that transformers (both hard and soft attention) cannot effectively model hierarchical structures, which are fundamental to many formal languages.
+
