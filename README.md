@@ -6,6 +6,8 @@ Main paper : On the Turing Completeness of Modern Neural Network Architectures (
 
 The reviews are invaluable to direct our methodology ( https://openreview.net/forum?id=HyGBdo0qFm )
 
+In general expressivity != learnability
+
 ---
 
 ### Interesting criticism is levied :
