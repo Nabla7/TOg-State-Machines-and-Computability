@@ -221,6 +221,13 @@ evaluation.
 
 #### *This answers a lot of questions, ir builds on the further improvements made by Bhattamishra et al. The issues about clarity which surrounded the initial paper by Perez have been adressed at this point. Proof rests on showing equivalence with RNN which is proven to be universal*
 
+### Turing Completeness of Bounded-Precision Recurrent Neural Networks (Chung and Siegelaman(!) 2021) 
+https://proceedings.neurips.cc/paper/2021/file/ef452c63f81d0105dd4486f775adec81-Paper.pdf
+
+- A step towards bounded precision:
+ - Symbolic (such as Turing Machines) and sub-symbolic processing (such as adaptive neural networks) are two competing methods of representing and processing information, each with its own advantages. An ultimate way to combine symbolic and sub-symbolic capabilities is by enabling the running of algorithms on a neural substrate, which means a neural network that can simulate a Universal Turing Machine (UTM). Previous works [1, 2, 3] have shown that this is possible – there exists a recurrent neural network (RNN) that can simulate a UTM. These proofs assumed a couple of neurons with unbounded precision that equals the number of symbols used in the Turing tape. Here we provide an alternative simulation of a UTM by RNNs with bounded-precision neurons only.
+
+----
 
 ### Overview of concepts to talk about in tentative order:
 
