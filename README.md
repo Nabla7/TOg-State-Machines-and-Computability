@@ -111,6 +111,8 @@ Role of Positional Encodings and Internal Representations: A crucial aspect of t
    - ### What:
       - We formally investigated the capabilities of selfattention in modeling regular languages and hierarchical structure. We showed that transformers cannot model periodic regular languages or basic recursion, either with hard or soft attention, and even if infinite precision is allowed. This entails that self-attention cannot in general emulate stacks or general finite-state automata. Our results theoretically confirm the idea that self-attention, by avoiding recurrence, has quite limited computational power.
       - ### **The crucial difference between these studies and studies of language recognition is that, in these studies, the networks are allowed to perform unbounded recurrent computations, arbitrarily longer than the input length.**
+    - ### How it relates to the arguments by Perez et al.:
+       - In the case of transformers, while Hahn's paper points out their limitations in emulating stacks and thereby their difficulties with certain structured tasks, this does not necessarily negate their Turing completeness. Transformers, especially with certain configurations or enhancements, can simulate the basic operations of a Turing machine. Their limitation in handling certain language structures more effectively points to a difference in efficiency or suitability for specific tasks, rather than a fundamental limitation in their computational power.
 
 ### Summary again :
 
@@ -119,13 +121,6 @@ The paper demonstrates that both the Transformer and Neural GPU are Turing compl
 
 - Arbitrary Precision Assumption and its practical caveat:
 A critical aspect of the proof is the assumption of arbitrary precision for internal representations. This is particularly important for storing and manipulating positional encodings in Transformers. However, in practical implementations, neural networks operate with fixed precision due to hardware constraints. Therefore, when fixed precision is used, the Transformer loses its Turing completeness, as the effect of positional encodings becomes equivalent to just increasing the size of the input alphabet​​.
-
-### On the Computational Power of Decoder-Only Transformer Language Models (Roberts, 2023) 
-https://arxiv.org/abs/2305.17026
-
-- In this paper we prove the ability of decoder-only transformer models to simulate an arbitrary RNN and are therefore computationally universal.
-
-> very minimal
 
 ### On the Computational Power of Transformers and its Implications in Sequence Modeling (Bhattamishra et al. 2020)
 https://aclanthology.org/2020.conll-1.37.pdf 
@@ -139,6 +134,93 @@ Transformers and showed that it can simulate a Turing machine given arbitrary pr
 (2020) showed some limitations of Transformer
 encoders in modeling regular and context-free languages
 "
+
+```plaintext
+Take-Home Messages. We showed that the order information can be provided either in the form
+of explicit encodings or masking without affecting computational power of Transformers. The
+decoder-encoder attention block plays a necessary
+role in conditioning the computation on the input
+sequence while the residual connection around it is
+necessary to keep track of previous computations.
+The feedforward network in the decoder is the only
+component capable of performing computations
+based on the input and prior computations. Our
+experimental results show that removing components essential for computational power inhibit the
+model’s ability to perform certain tasks. At the
+same time, the components which do not play a
+role in the computational power m
+```
+
+```plaintext
+Although our proofs rely on arbitrary precision,
+which is common practice while studying the
+computational power of neural networks in theory
+(Siegelmann and Sontag, 1992; Perez et al. ´ , 2019;
+Hahn, 2020; Yun et al., 2020), implementations in
+practice work over fixed precision settings. However,
+our construction provides a starting point to
+analyze Transformers under finite precision. Since
+RNNs can recognize all regular languages in finite
+precision (Korsky and Berwick, 2019), it follows
+from our construction that Transformer can also
+recognize a large class of regular languages in finite precision.
+At the same time, it does not imply
+that it can recognize all regular languages given
+the limitation due to the precision required to encode positional
+information. We leave the study of
+Transformers in finite precision for future work.
+```
+
+### On the Computational Power of Decoder-Only Transformer Language Models (Roberts, 2023) 
+https://arxiv.org/abs/2305.17026
+
+- In this paper we prove the ability of decoder-only transformer models to simulate an arbitrary RNN and are therefore computationally universal.
+
+> very minimal
+
+While the vanilla transformer is known to be Turing Complete (Pérez et al., 2019; Bhattamishraet al., 2020), this does not naturally extend to deocder-only models. Further, no formal evaluation of the computational expressivity exists for the decoder-only transformer architecture. In this paper:
+1. We show that the decoder-only transformerarchitecture is Turing complete
+2. We show that this result holds even for single layer, single attention head decoder-onlyarchitectures
+3. We establish a minimum vector dimensionality, relative to the token embedding size, necessary for Turing completeness
+4. We classify transformer models as B machines(Wang, 1957) and identify important future work for en situ computational expressivity
+> some clarity:
+
+```plaintext
+It is important to point out, seq-to-seq models are not
+themselves Turing machines as they do not typically possess
+the ability to overwrite a space on their “tape" (the
+output vector sequence). Rather, they are much more like the
+variant of computational machine studied by (Wang, 1957) called B
+machines. B machines are sometimes informally
+referred to as non-erasing Turing machines (Neary
+et al., 2014). Wang showed that the ability to erase
+(or overwrite) is not fundamental to computational
+universality. However, he does so by making use of
+“auxiliary squares". That is, the machine has free
+usage of space to store the results of intermediate
+or auxiliary calculations. Wang notes that:
+It remains an open question whether we can dispense with auxiliary squares and still be able to
+compute all recursive functions by programs consisting of only basic steps.
+It remains an important, though apparently unconsidered point. RNNs and decoder-only transformer models are
+likewise assumed to be unconstrained regarding the content of their output when
+computing recursive functions. However, in many
+applications, the output is designed to be constrained to the outputs of some induced function
+with a given time delay between samples (like is
+the case in natural language). Limiting the outputs
+of an RNN in this way violates the assumption
+regarding access to Wang’s “auxiliary squares".
+A homo-morph of Wang’s question can be
+stated in terms of recursion theory, drawing on the
+Turing-Church conjecture we may equivalently ask
+whether all partial recursive functions are implementable without access to auxiliary computational
+space. The answer would seem to be no as this
+should limit the network to only calculating primitive recursive functions (those calculable via for
+loops) at best. However, this is far from a formal
+evaluation.
+```
+
+#### *This answers a lot of questions, ir builds on the further improvements made by Bhattamishra et al. The issues about clarity which surrounded the initial paper by Perez have been adressed at this point. Proof rests on showing equivalence with RNN which is proven to be universal*
+
 
 ### Overview of concepts to talk about in tentative order:
 
