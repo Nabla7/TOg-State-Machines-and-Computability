@@ -223,7 +223,7 @@ loops) at best. However, this is far from a formal
 evaluation.
 ```
 
-#### *This answers a lot of questions, ir builds on the further improvements made by Bhattamishra et al. The issues about clarity which surrounded the initial paper by Perez have been adressed at this point. Proof rests on showing equivalence with RNN which is proven to be universal*
+#### *This answers a lot of questions, ir builds on the further improvements made by Bhattamishra et al. The issues about clarity which surrounded the initial paper by Perez have been adressed at this point. Proof rests on showing that transformer can simulate an RNN which is proven to be universal*
 
 ### Turing Completeness of Bounded-Precision Recurrent Neural Networks (Chung and Siegelaman(!) 2021) 
 https://proceedings.neurips.cc/paper/2021/file/ef452c63f81d0105dd4486f775adec81-Paper.pdf
@@ -274,6 +274,12 @@ So while transformers are theoretically Turing complete, their practical utility
 "APPENDIX B ON THE COMPUTATIONAL POWER OF UT VS TRANSFORMER : With respect to their computational power, the key difference between the Transformer and the Universal Transformer lies in the number of sequential steps of computation (i.e. in depth). While a standard Transformer executes a total number of operations that scales with the input size, the number of sequential operations is constant, independent of the input size and determined solely by the number of layers. Assuming finite precision, this property implies that the standard Transformer cannot be computationally universal. When choosing a number of steps as a function of the input length, however, the Universal Transformer does not suffer from this limitation. Note that this holds independently of whether or not adaptive computation time is employed but does assume a non-constant, even if possibly deterministic, number of steps. Varying the number of steps dynamically after training is enabled by sharing weights across sequential computation steps in the Universal Transformer. An intuitive example are functions whose execution requires the sequential processing of each input element. In this case, for any given choice of depth T, one can construct an input sequence of length N > T that cannot be processed correctly by a standard Transformer. With an appropriate, input-length dependent choice of sequential steps, however, a Universal Transformer, RNNs or Neural GPUs can execute such a function."
 
 -> no formal proof is given, intuition seems to be correct however, standard transformers, due to the number of sequential operations being constant, will fail to properly handle recursion; failing to conform to the principle of primitive recursion disqualifies the standard model from being Turing complete as primitive recursion
+
+### Transformers Learn Shortcuts to Automata (Liu et al. Feb 2023) : https://openreview.net/forum?id=De4FYqjFueZ
+- Considers fixed precision transformers, shows that they simulate finite state automata, transformers with o(T) layers can simulate all finite automata with O(logT)-depth.
+
+"We have conducted a theoretical and empirical analysis of how shallow Transformers can learn shortcut solutions to the problem of simulating the transitions of semiautomata (and thus, the algebraic structures which underlie regular expressions, finite-state transducers, and deterministic MDPs). Using tools from semigroup theory and circuit complexity, we have constructed explicit logarithmic-depth and constant-depth shortcuts for semiautomaton simulation. Experimentally, we have shown that gradient-based optimization finds shortcut solutions which generalize near-perfectly in-distribution (Section 4), but are brittle out-of-distribution (Section 5)."
+
 
 
 ----
