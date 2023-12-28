@@ -269,6 +269,13 @@ https://proceedings.neurips.cc/paper/2021/file/ef452c63f81d0105dd4486f775adec81-
 
 So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
 
+### --> UNIVERSAL TRANSFORMERS (from [1] above) : https://openreview.net/pdf?id=HyzdRiR9Y7
+
+"APPENDIX B ON THE COMPUTATIONAL POWER OF UT VS TRANSFORMER : With respect to their computational power, the key difference between the Transformer and the Universal Transformer lies in the number of sequential steps of computation (i.e. in depth). While a standard Transformer executes a total number of operations that scales with the input size, the number of sequential operations is constant, independent of the input size and determined solely by the number of layers. Assuming finite precision, this property implies that the standard Transformer cannot be computationally universal. When choosing a number of steps as a function of the input length, however, the Universal Transformer does not suffer from this limitation. Note that this holds independently of whether or not adaptive computation time is employed but does assume a non-constant, even if possibly deterministic, number of steps. Varying the number of steps dynamically after training is enabled by sharing weights across sequential computation steps in the Universal Transformer. An intuitive example are functions whose execution requires the sequential processing of each input element. In this case, for any given choice of depth T, one can construct an input sequence of length N > T that cannot be processed correctly by a standard Transformer. With an appropriate, input-length dependent choice of sequential steps, however, a Universal Transformer, RNNs or Neural GPUs can execute such a function."
+
+-> no formal proof is given, intuition seems to be correct however, standard transformers, due to the number of sequential operations being constant, will fail to properly handle recursion; failing to conform to the principle of primitive recursion disqualifies the standard model from being Turing complete as primitive recursion
+
+
 ----
 # Hahn (2020) : 
 
