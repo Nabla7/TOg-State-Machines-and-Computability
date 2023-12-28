@@ -223,6 +223,8 @@ loops) at best. However, this is far from a formal
 evaluation.
 ```
 
+- "It is reasonable to believe universal function approximation may be grounds for expecting Turing completeness to hold due to the progression of the literature for ANNs which began by showing universal function approximation Hornik et al. (1989) and then progressed, through the addition of recursion, to Turing completeness Siegelmann and Sontag (1992). Further, it is intuitive based on the recursive capability of decoder-only models coupled with universal function approximation, as a model which can compute any partial recursive function is necessarily Turing complete Turing (1937). From a naive perspective, Turing completeness seems a given. This would require that a universal function approximator be guaranteed the ability to implement all primitive functions, composition, and minimisation as defined in Neto et al. (1997). Thus, the computational class of primitive functions, composition, and minimisation would be equivalent to the class of universal function approximation. However, this can’t be assumed and is an open question. *Interestingly, no paper in the literature has addressed this theoretical question at all*."
+
 #### *This answers a lot of questions, ir builds on the further improvements made by Bhattamishra et al. The issues about clarity which surrounded the initial paper by Perez have been adressed at this point. Proof rests on showing that transformer can simulate an RNN which is proven to be universal*
 
 ### Turing Completeness of Bounded-Precision Recurrent Neural Networks (Chung and Siegelaman(!) 2021) 
@@ -231,43 +233,6 @@ https://proceedings.neurips.cc/paper/2021/file/ef452c63f81d0105dd4486f775adec81-
 - A step towards bounded precision:
  - Symbolic (such as Turing Machines) and sub-symbolic processing (such as adaptive neural networks) are two competing methods of representing and processing information, each with its own advantages. An ultimate way to combine symbolic and sub-symbolic capabilities is by enabling the running of algorithms on a neural substrate, which means a neural network that can simulate a Universal Turing Machine (UTM). Previous works [1, 2, 3] have shown that this is possible – there exists a recurrent neural network (RNN) that can simulate a UTM. These proofs assumed a couple of neurons with unbounded precision that equals the number of symbols used in the Turing tape. Here we provide an alternative simulation of a UTM by RNNs with bounded-precision neurons only.
 
-----
-
-### Overview of concepts to talk about in tentative order:
-
-- from wikipedia on Universal Turing Machine:
-> A universal Turing machine can calculate any recursive function, decide any recursive language, and accept any recursively enumerable language. According to the Church–Turing thesis, the problems solvable by a universal Turing machine are exactly those problems solvable by an algorithm or an effective method of computation, for any reasonable definition of those terms. For these reasons, a universal Turing machine serves as a standard against which to compare computational systems, and a system that can simulate a universal Turing machine is called Turing complete.
-
-- talk about transformer
-  - Turing complete theoretically even without positional encoding
-  - Not Turing complete empirically, limited precision, is able to recognize certain formal languages, heavily dependent on positional encoding to work.
-
----
-
-### First concrete plan assembled from the references:
-
-1. **Definition of Turing Completeness**: A computational system is considered Turing complete if it can simulate any Turing machine. This means it can compute anything that is computable, given enough time and memory.
-
-2. **Transformers and Turing Completeness**:
-    - The initial paper by Pérez et al. (2019) demonstrated that transformers are theoretically Turing complete. This conclusion is based on the assumption that transformers have arbitrary precision in their internal representations.
-    - Turing completeness in this context implies that transformers, in theory, can perform any computation that a Turing machine can, assuming they are not limited by practical constraints like finite precision and finite memory.
-
-3. **Practical Limitations**:
-    - In practical implementations, transformers are limited by hardware constraints, most notably fixed precision (like float32). This limitation is significant because it affects the ability of transformers to handle computations requiring very high precision.
-    - Furthermore, transformers, particularly those without external memory, rely heavily on their internal structure and precision to handle computations. The absence of external memory means that transformers must use their internal capacity (like layers, heads, and internal states) to store and process information.
-
-4. **Stack Emulation and Turing Completeness**:
-    - The ability to emulate a stack is a specific capability often associated with processing nested or hierarchical structures. While it's a useful feature for certain types of computations, it's not a requirement for a system to be Turing complete.
-    - Transformers' limitations in emulating stacks, as highlighted in Hahn's paper, point to challenges in handling certain types of structured tasks. However, this does not directly translate to a lack of Turing completeness. It rather indicates that while transformers can theoretically compute anything a Turing machine can, they might not be the most efficient or effective tool for every kind of computation, especially those involving deeply nested or recursive structures.
-
-5. **Theoretical vs. Empirical Turing Completeness**:
-    - Theoretically, transformers are Turing complete under the assumption of arbitrary precision. This aligns with the classical approach in theoretical computer science where such idealized assumptions are common.
-    - Empirically, in real-world implementations, transformers may not exhibit Turing completeness due to the aforementioned practical constraints. This does not negate their theoretical computational power but highlights the gap between theoretical models and practical applications.
-
-6. **Future Research and Practical Implications**:
-    - The current state of research suggests a path forward where the computational power of transformers can be further explored, especially in the context of fixed precision and practical constraints.
-
-So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
 
 ### --> UNIVERSAL TRANSFORMERS (from [1] above) : https://openreview.net/pdf?id=HyzdRiR9Y7
 
@@ -280,6 +245,19 @@ So while transformers are theoretically Turing complete, their practical utility
 
 "We have conducted a theoretical and empirical analysis of how shallow Transformers can learn shortcut solutions to the problem of simulating the transitions of semiautomata (and thus, the algebraic structures which underlie regular expressions, finite-state transducers, and deterministic MDPs). Using tools from semigroup theory and circuit complexity, we have constructed explicit logarithmic-depth and constant-depth shortcuts for semiautomaton simulation. Experimentally, we have shown that gradient-based optimization finds shortcut solutions which generalize near-perfectly in-distribution (Section 4), but are brittle out-of-distribution (Section 5)."
 
+- They show that, during training, transformers learn non recursive functions rather well. At test time however, they fail to generalize, implying that they learned shortcuts which allowed them to perform well during training. 
+- To extend the transformer to learn recursive functions, they use scratchpad training (Chain of Thought) and a recency bias to force the network to reccur during inference.
+  - " Intuitively, if the model is only allowed to put attention on the current input token and the current scratchpad (which is simply the current state), then the model is forced to be recurrent; recency bias can be considered as a soft relaxation of the same idea. Combining scratchpad and recency bias, we are able to train a Transformer to learn the recurrent solution, which is resilient to distribution shift "
+
+We provide an extremely abridged selection of relevant concepts in circuit complexity. For a systematic introduction, refer to (Arora & Barak, 2009). In particular, we discuss each circuit complexity class and inclusion below: 
+
+NC0 ⊂ AC0 ⊂ ACC0 ⊆ TC0 ⊆ NC1 . 
+
+- NC0 is the class of constant-depth, constant-fan-in, polynomial-sized AND/OR/NOT circuits. If a constant-depth Transformer only uses the constant-degree sparse selection constructions in (Edelman et al., 2022), it can be viewed as representing functions in this class. However, the representational power of these circuits is extremely limited: they cannot express any function which depend on a number of inputs growing with T.
+-  AC0 is the class of constant-depth, unbounded-fan-in, polynomial-sized AND/OR circuits, allowing NOT gates only at the inputs. A classic result is that the parity of T bits is not in AC0 (Furst et al., 1984); Hahn (2020) concludes the same for bounded-norm (and thus boundedLipschitz-constant) constant-depth Transformers.
+-  ACC0 extends AC0 with an additional type of unbounded-fan-in gate known as MODp for any prime number p, which checks if the sum of the input bits is a multiple of p. Theorem 2 comes from the fact that the semigroup word problem (which is essentially identical to semiautomaton simulation) is in this class; see (Barrington & Therien ´ , 1988).
+-   TC0 extends AC0 with an additional type of unbounded-fan-in gate called MAJ, which computes the majority of an odd number of input bits (a threshold gate). It is straightforward to simulate modular counters using a polynomial number of parallel thresholds (i.e. ACC0 ⊆ TC0 ). Whether this inclusion is strict (can you simulate a threshold in constant depth with modular counters?) is a salient open problem in circuit complexity. Threshold circuits are a very natural model for objects of interest in machine learning like decision trees and neural networks (Merrill et al., 2021).
+-  NC1 is the class of O(log T)-depth, constant-fan-in, polynomial-sized AND/OR/NOT circuits. It is an extremely popular and natural complexity class capturing efficiently parallelizable algorithms. It is u
 
 
 ----
@@ -306,3 +284,40 @@ The paper "Theoretical Limitations of Self-Attention in Neural Sequence Models" 
    - **Combination of Techniques**: The paper employs a mix of combinatorial arguments, the concept of input restrictions, and probabilistic methods to prove the limitations of self-attention.
    - **Implications for Hierarchical Structure**: A key finding is that transformers (both hard and soft attention) cannot effectively model hierarchical structures, which are fundamental to many formal languages.
 
+---
+
+----
+
+### Overview of concepts to talk about in tentative order:
+
+- from wikipedia on Universal Turing Machine:
+> A universal Turing machine can calculate any recursive function, decide any recursive language, and accept any recursively enumerable language. According to the Church–Turing thesis, the problems solvable by a universal Turing machine are exactly those problems solvable by an algorithm or an effective method of computation, for any reasonable definition of those terms. For these reasons, a universal Turing machine serves as a standard against which to compare computational systems, and a system that can simulate a universal Turing machine is called Turing complete.
+
+- talk about transformer
+  - Turing complete theoretically even without positional encoding
+  - Not Turing complete empirically, limited precision, is able to recognize certain formal languages, heavily dependent on positional encoding to work.
+
+### First concrete plan assembled from the references:
+
+1. **Definition of Turing Completeness**: A computational system is considered Turing complete if it can simulate any Turing machine. This means it can compute anything that is computable, given enough time and memory.
+
+2. **Transformers and Turing Completeness**:
+    - The initial paper by Pérez et al. (2019) demonstrated that transformers are theoretically Turing complete. This conclusion is based on the assumption that transformers have arbitrary precision in their internal representations.
+    - Turing completeness in this context implies that transformers, in theory, can perform any computation that a Turing machine can, assuming they are not limited by practical constraints like finite precision and finite memory.
+
+3. **Practical Limitations**:
+    - In practical implementations, transformers are limited by hardware constraints, most notably fixed precision (like float32). This limitation is significant because it affects the ability of transformers to handle computations requiring very high precision.
+    - Furthermore, transformers, particularly those without external memory, rely heavily on their internal structure and precision to handle computations. The absence of external memory means that transformers must use their internal capacity (like layers, heads, and internal states) to store and process information.
+
+4. **Stack Emulation and Turing Completeness**:
+    - The ability to emulate a stack is a specific capability often associated with processing nested or hierarchical structures. While it's a useful feature for certain types of computations, it's not a requirement for a system to be Turing complete.
+    - Transformers' limitations in emulating stacks, as highlighted in Hahn's paper, point to challenges in handling certain types of structured tasks. However, this does not directly translate to a lack of Turing completeness. It rather indicates that while transformers can theoretically compute anything a Turing machine can, they might not be the most efficient or effective tool for every kind of computation, especially those involving deeply nested or recursive structures.
+
+5. **Theoretical vs. Empirical Turing Completeness**:
+    - Theoretically, transformers are Turing complete under the assumption of arbitrary precision. This aligns with the classical approach in theoretical computer science where such idealized assumptions are common.
+    - Empirically, in real-world implementations, transformers may not exhibit Turing completeness due to the aforementioned practical constraints. This does not negate their theoretical computational power but highlights the gap between theoretical models and practical applications.
+
+6. **Future Research and Practical Implications**:
+    - The current state of research suggests a path forward where the computational power of transformers can be further explored, especially in the context of fixed precision and practical constraints.
+
+So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
