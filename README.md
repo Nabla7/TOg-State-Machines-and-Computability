@@ -296,6 +296,20 @@ Large Scale experimentation to determine to which extent neurals nets are able t
 
 """ We leveraged the theory of computation to better understand how and why neural networks generalize on algorithmic sequence prediction tasks. Our extensive empirical evaluation demonstrates that there is a model hierarchy on the tasks we investigated, which are representative of the different levels of the Chomsky hierarchy. In particular, we showed that state-of-the-art architectures, such as LSTMs and Transformers, cannot solve seemingly simple tasks, such as duplicating a string, when evaluated on sequences that are significantly longer than those seen during training. Moreover, we showed that models interacting with an external memory structure, such as a stack or a finite tape, can climb the Chomsky hierarchy, indicating a promising direction for improvements in architecture design """
 
+### Sequential neural networks as automata. (Merill 2020) (referred to by hahn) https://arxiv.org/pdf/1906.01615.pdf :
+
+"""
+#### Introducing the Asymptotic Analysis 
+To investigate the capacities of different neural network architectures, we need to first define what it means for a neural network to accept a language. There are a variety of ways to formalize language acceptance, and changes to this definition lead to dramatically different characterizations. In their analysis of RNN expressiveness, Siegelmann and Sontag (1992) allow RNNs to perform an unbounded number of recurrent steps even after the input has been consumed. Furthermore, they assume that the hidden units of the network can have arbitrarily fine-grained precision. Under this very general definition of language acceptance, Siegelmann and Sontag (1992) found that even a simple recurrent network (SRN) can simulate a Turing machine. 
+
+We want to impose the following constraints on neural network computation, which are more realistic to how networks are trained in practice (Weiss et al., 2018): 
+
+1. Real-time: The network performs one iteration of computation per input symbol.
+2. Bounded precision: The value of each cell in the network is representable by O(log n) bits on sequences of length n.
+
+Informally, a neural sequence acceptor is a network which reads a variable-length sequence of characters and returns the probability that the input sequence is a valid sentence in some formal language.
+"""
+
 ### Overview of concepts to talk about in tentative order (gonna change this):
 
 - from wikipedia on Universal Turing Machine:
