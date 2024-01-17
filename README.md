@@ -279,10 +279,7 @@ The paper "Theoretical Limitations of Self-Attention in Neural Sequence Models" 
 ### 4. Soft Attention Analysis:
    - **Lemma 5**: Addresses soft attention transformers. It suggests that changing a single input symbol in a long input sequence only causes a bounded change in the output activation.
    - **Theorem 6**: This theorem discusses the limitations of soft attention transformers in modeling distributions over formal languages like PARITY or 2DYCK.
-
-### 5. Mathematical Proofs and Techniques:
-   - **Combination of Techniques**: The paper employs a mix of combinatorial arguments, the concept of input restrictions, and probabilistic methods to prove the limitations of self-attention.
-   - **Implications for Hierarchical Structure**: A key finding is that transformers (both hard and soft attention) cannot effectively model hierarchical structures, which are fundamental to many formal languages.
+   - 
 
 ---
 ### On The Computational Power of Neural Nets (Siegelmann 1992) https://binds.cs.umass.edu/papers/1992_Siegelmann_COLT.pdf
@@ -295,6 +292,8 @@ This is the paper which resides firmly at the root of all these avenues of inqui
 Large Scale experimentation to determine to which extent neurals nets are able to generalize on tasks in the Chomsky hierarchy.
 
 """ We leveraged the theory of computation to better understand how and why neural networks generalize on algorithmic sequence prediction tasks. Our extensive empirical evaluation demonstrates that there is a model hierarchy on the tasks we investigated, which are representative of the different levels of the Chomsky hierarchy. In particular, we showed that state-of-the-art architectures, such as LSTMs and Transformers, cannot solve seemingly simple tasks, such as duplicating a string, when evaluated on sequences that are significantly longer than those seen during training. Moreover, we showed that models interacting with an external memory structure, such as a stack or a finite tape, can climb the Chomsky hierarchy, indicating a promising direction for improvements in architecture design """
+
+---
 
 ### Sequential neural networks as automata. (Merill 2020) (referred to by hahn) https://arxiv.org/pdf/1906.01615.pdf :
 
@@ -310,36 +309,16 @@ We want to impose the following constraints on neural network computation, which
 Informally, a neural sequence acceptor is a network which reads a variable-length sequence of characters and returns the probability that the input sequence is a valid sentence in some formal language.
 """
 
-### Overview of concepts to talk about in tentative order (gonna change this):
+---
 
-- from wikipedia on Universal Turing Machine:
-> A universal Turing machine can calculate any recursive function, decide any recursive language, and accept any recursively enumerable language. According to the Church–Turing thesis, the problems solvable by a universal Turing machine are exactly those problems solvable by an algorithm or an effective method of computation, for any reasonable definition of those terms. For these reasons, a universal Turing machine serves as a standard against which to compare computational systems, and a system that can simulate a universal Turing machine is called Turing complete.
+### Evolution in NLP from seq2seq models to transformers (https://medium.com/@zunoor9/evolution-in-nlp-from-seq2seq-models-to-transformers-fe2129e1094f)
 
-- talk about transformer
-  - Turing complete theoretically even without positional encoding
-  - Not Turing complete empirically, limited precision, is able to recognize certain formal languages, heavily dependent on positional encoding to work.
+Extremely good read on the background for all of this in plain english
 
-### First concrete plan assembled from the references:
+---
 
-1. **Definition of Turing Completeness**: A computational system is considered Turing complete if it can simulate any Turing machine. This means it can compute anything that is computable, given enough time and memory.
 
-2. **Transformers and Turing Completeness**:
-    - The initial paper by Pérez et al. (2019) demonstrated that transformers are theoretically Turing complete. This conclusion is based on the assumption that transformers have arbitrary precision in their internal representations.
-    - Turing completeness in this context implies that transformers, in theory, can perform any computation that a Turing machine can, assuming they are not limited by practical constraints like finite precision and finite memory.
 
-3. **Practical Limitations**:
-    - In practical implementations, transformers are limited by hardware constraints, most notably fixed precision (like float32). This limitation is significant because it affects the ability of transformers to handle computations requiring very high precision.
-    - Furthermore, transformers, particularly those without external memory, rely heavily on their internal structure and precision to handle computations. The absence of external memory means that transformers must use their internal capacity (like layers, heads, and internal states) to store and process information.
 
-4. **Stack Emulation and Turing Completeness**:
-    - The ability to emulate a stack is a specific capability often associated with processing nested or hierarchical structures. While it's a useful feature for certain types of computations, it's not a requirement for a system to be Turing complete.
-    - Transformers' limitations in emulating stacks, as highlighted in Hahn's paper, point to challenges in handling certain types of structured tasks. However, this does not directly translate to a lack of Turing completeness. It rather indicates that while transformers can theoretically compute anything a Turing machine can, they might not be the most efficient or effective tool for every kind of computation, especially those involving deeply nested or recursive structures.
 
-5. **Theoretical vs. Empirical Turing Completeness**:
-    - Theoretically, transformers are Turing complete under the assumption of arbitrary precision. This aligns with the classical approach in theoretical computer science where such idealized assumptions are common.
-    - Empirically, in real-world implementations, transformers may not exhibit Turing completeness due to the aforementioned practical constraints. This does not negate their theoretical computational power but highlights the gap between theoretical models and practical applications.
 
-6. **Future Research and Practical Implications**:
-    - The current state of research suggests a path forward where the computational power of transformers can be further explored, especially in the context of fixed precision and practical constraints.
-
-So while transformers are theoretically Turing complete, their practical utility and efficiency for specific types of computations, especially those requiring high precision or stack-like processing, are subject to ongoing research and development.
