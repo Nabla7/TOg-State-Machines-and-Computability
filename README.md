@@ -285,10 +285,18 @@ The paper "Theoretical Limitations of Self-Attention in Neural Sequence Models" 
    - **Implications for Hierarchical Structure**: A key finding is that transformers (both hard and soft attention) cannot effectively model hierarchical structures, which are fundamental to many formal languages.
 
 ---
+### On The Computational Power of Neural Nets (Siegelmann 1992) https://binds.cs.umass.edu/papers/1992_Siegelmann_COLT.pdf
 
+This is the paper which resides firmly at the root of all these avenues of inquiry, whenever transformers are investigeted, this paper is referenced.
 ----
 
-### Overview of concepts to talk about in tentative order:
+### NEURAL NETWORKS AND THE CHOMSKY HIERARCHY (Delétang et al. 2023) https://arxiv.org/pdf/2207.02098.pdf
+
+Large Scale experimentation to determine to which extent neurals nets are able to generalize on tasks in the Chomsky hierarchy.
+
+""" We leveraged the theory of computation to better understand how and why neural networks generalize on algorithmic sequence prediction tasks. Our extensive empirical evaluation demonstrates that there is a model hierarchy on the tasks we investigated, which are representative of the different levels of the Chomsky hierarchy. In particular, we showed that state-of-the-art architectures, such as LSTMs and Transformers, cannot solve seemingly simple tasks, such as duplicating a string, when evaluated on sequences that are significantly longer than those seen during training. Moreover, we showed that models interacting with an external memory structure, such as a stack or a finite tape, can climb the Chomsky hierarchy, indicating a promising direction for improvements in architecture design """
+
+### Overview of concepts to talk about in tentative order (gonna change this):
 
 - from wikipedia on Universal Turing Machine:
 > A universal Turing machine can calculate any recursive function, decide any recursive language, and accept any recursively enumerable language. According to the Church–Turing thesis, the problems solvable by a universal Turing machine are exactly those problems solvable by an algorithm or an effective method of computation, for any reasonable definition of those terms. For these reasons, a universal Turing machine serves as a standard against which to compare computational systems, and a system that can simulate a universal Turing machine is called Turing complete.
