@@ -261,9 +261,11 @@ NC0 ⊂ AC0 ⊂ ACC0 ⊆ TC0 ⊆ NC1 .
 
 
 ----
-# Hahn (2020) : 
+# Hahn (2020)  "Theoretical Limitations of Self-Attention in Neural Sequence Models": 
 
-The paper "Theoretical Limitations of Self-Attention in Neural Sequence Models" by Michael Hahn provides several key mathematical insights and proofs regarding the limitations of self-attention mechanisms in transformers:
+- In this work, we mathematically investigate the computational power of self-attention to model formal languages. Across both soft and hard attention, we show strong theoretical limitations of the computational abilities of selfattention, finding that it cannot model periodic finite-state languages, nor hierarchical structure, unless the number of layers or heads increases with input length. These limitations seem surprising given the practical success of self-attention and the prominent role assigned to hierarchical structure in linguistics, suggesting that natural language can be approximated well with models that are too weak for the formal languages typically assumed in theoretical linguistics.
+
+provides several key mathematical insights and proofs regarding the limitations of self-attention mechanisms in transformers:
 
 ### 1. The Concept of Input Restrictions:
    - **Definition**: An input restriction is a family of maps $\rho_n : \{1,...,n\} \rightarrow \{*,0,1\}$  for  $n \in \mathbb{N}$. This concept is used to analyze how transformers can be 'forced' to ignore certain input bits by setting some inputs to fixed values.
@@ -297,7 +299,12 @@ Large Scale experimentation to determine to which extent neurals nets are able t
 
 ### Sequential neural networks as automata. (Merill 2020) (referred to by hahn) https://arxiv.org/pdf/1906.01615.pdf :
 
-"""
+This work attempts to explain the types of
+computation that neural networks can perform
+by relating them to automata. We first define
+what it means for a real-time network with
+bounded precision to accept a language.
+
 #### Introducing the Asymptotic Analysis 
 To investigate the capacities of different neural network architectures, we need to first define what it means for a neural network to accept a language. There are a variety of ways to formalize language acceptance, and changes to this definition lead to dramatically different characterizations. In their analysis of RNN expressiveness, Siegelmann and Sontag (1992) allow RNNs to perform an unbounded number of recurrent steps even after the input has been consumed. Furthermore, they assume that the hidden units of the network can have arbitrarily fine-grained precision. Under this very general definition of language acceptance, Siegelmann and Sontag (1992) found that even a simple recurrent network (SRN) can simulate a Turing machine. 
 
@@ -307,7 +314,6 @@ We want to impose the following constraints on neural network computation, which
 2. Bounded precision: The value of each cell in the network is representable by O(log n) bits on sequences of length n.
 
 Informally, a neural sequence acceptor is a network which reads a variable-length sequence of characters and returns the probability that the input sequence is a valid sentence in some formal language.
-"""
 
 ---
 ### NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE (Bahdanau et al. 2014) https://arxiv.org/pdf/1409.0473.pdf
