@@ -310,6 +310,26 @@ Informally, a neural sequence acceptor is a network which reads a variable-lengt
 """
 
 ---
+### NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE (Bahdanau et al. 2014) https://arxiv.org/pdf/1409.0473.pdf
+
+found it from https://en.wikipedia.org/wiki/Seq2seq
+
+- "The attention mechanism is an enhancement introduced by Bahdanau et al. in 2014 [11] to address limitations in the basic Seq2Seq architecture where longer input sequence results in the hidden state output of the encoder become irrelevant for the decoder. It enables the model to selectively focus on different parts of the input sequence during the decoding process. At each decoder step, an alignment model calculates the attention score using the current decoder state and all of the attention hidden vectors as input. An alignment model is another neural network model that is trained jointly with the seq2seq model used to calculate how well an input, represented by the hidden state, matches with the previous output, represented by attention hidden state. A softmax function is then applied to the attention score to get the attention weight."
+
+#### Some clear background from this paper:
+
+Most of the proposed neural machine translation models belong to a family of encoder–
+decoders (Sutskever et al., 2014; Cho et al., 2014a), with an encoder and a decoder for each language, or involve a language-specific encoder applied to each sentence whose outputs are then compared (Hermann and Blunsom, 2014). An encoder neural network reads and encodes a source sentence into a fixed-length vector. A decoder then outputs a translation from the encoded vector. The
+whole encoder–decoder system, which consists of the encoder and the decoder for a language pair,
+is jointly trained to maximize the probability of a correct translation given a source sentence.
+A potential issue with this encoder–decoder approach is that a neural network needs to be able to
+compress all the necessary information of a source sentence into a fixed-length vector. This may
+make it difficult for the neural network to cope with long sentences, especially those that are longer
+than the sentences in the training corpus. Cho et al. (2014b) showed that indeed the performance of
+a basic encoder–decoder deteriorates rapidly as the length of an input sentence increases.
+
+
+---
 
 ### Evolution in NLP from seq2seq models to transformers (https://medium.com/@zunoor9/evolution-in-nlp-from-seq2seq-models-to-transformers-fe2129e1094f)
 
